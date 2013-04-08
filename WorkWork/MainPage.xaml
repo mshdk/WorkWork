@@ -1,0 +1,98 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="WorkWork.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800" 
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+ 
+        <!--Panorama control-->
+        <controls:Panorama Title="WorkWork" Loaded="Panorama_Loaded" GotFocus="Panorama_GotFocus">
+          <!-- default image looks like shit  <controls:Panorama.Background>
+                <ImageBrush ImageSource="PanoramaBackground.png"/>
+            </controls:Panorama.Background>
+ -->
+            <!--Panorama item one-->
+            <controls:PanoramaItem Header="Today">
+                                   <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="221" />
+                        <ColumnDefinition Width="199" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Height="30" HorizontalAlignment="Left" Margin="30,33,0,0" Name="startBlock" Text="Start Time:" VerticalAlignment="Top" />
+                <TextBlock Height="44" HorizontalAlignment="Left" Margin="160,33,0,0" Name="startLogging" Text="Tap to start logging" VerticalAlignment="Top" Tap="startLogging_Tap" Grid.ColumnSpan="2" Width="242" />
+                <TextBlock Height="30" HorizontalAlignment="Left" Margin="30,102,0,0" Name="stopBlock" Text="Stop Time:" VerticalAlignment="Top" />
+                <TextBlock Height="44" HorizontalAlignment="Left" Margin="160,102,0,0" Name="stopLogging" Text="Tap to stop logging" VerticalAlignment="Top" Tap="stopLogging_Tap" Grid.ColumnSpan="2" Width="242" />
+                    <toolkit:TimePicker HorizontalAlignment="Left" Margin="154,164,0,0" Name="startTextBox" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="175" Height="77" FontFamily="Segoe WP Bold" />
+                </Grid>
+                <!--Double line list with text wrapping-->
+                <!--
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,17" Width="432" Height="78">
+                                <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate> 
+                </ListBox>-->
+            </controls:PanoramaItem>
+ 
+            <!--Panorama item two-->
+            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
+            <controls:PanoramaItem Header="Work Log">
+                <!--Double line list with image placeholder and text wrapping-->
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Button Name="Email" Tap="Email_Tap" Height="65" Width="210" Content="Email" FontSize="20" />
+                    <Button Name="Clear" Height="65" Width="210" Content="Clear" FontSize="20" Tap="Clear_Tap" />
+                    </StackPanel>
+                    <ListBox Margin="0,0,-12,0" Name="timeBox" Height="430">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+                                <StackPanel Orientation="Vertical">
+                                <!--Replace rectangle with image-->
+                               <!-- <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
+                                -->
+                                    <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding day}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                        <TextBlock Text=" - " TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                        <TextBlock Text="{Binding hours}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                        <TextBlock Text="Hours" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding startTime}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Text="{Binding stopTime}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                               
+                            </StackPanel>
+                             
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </StackPanel>
+            </controls:PanoramaItem>
+            <!--Panorama item three-->
+            <controls:PanoramaItem Header="Help">
+                <Grid>
+                    <TextBox Height="339" HorizontalAlignment="Left" Margin="6,4,0,0" Name="helpBox" Text="WorkWork is a small and simple time tracking application. Simply tap the start text when you start working and the stop text when you leave. If you forget to start or stop it on you can change the time in the time selector." VerticalAlignment="Top" Width="410" TextWrapping="Wrap" Opacity="1" Foreground="White" Background="Black" BorderBrush="Black" />
+                    <TextBlock Height="30" HorizontalAlignment="Left" Margin="66,358,0,0" Name="homepage" Text="http://mobile.martinschultz.dk" VerticalAlignment="Top" Tap="homepage_Tap" />
+                </Grid>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+        
+    </Grid>
+</phone:PhoneApplicationPage>
